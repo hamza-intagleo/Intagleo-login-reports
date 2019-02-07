@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: employee_data
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  employee_id :string
+#  designation :string
+#  department  :string
+#  manager     :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  employee_id: MyString
+  designation: MyString
+  department: MyString
+  manager: MyString
+
+two:
+  name: MyString
+  employee_id: MyString
+  designation: MyString
+  department: MyString
+  manager: MyString

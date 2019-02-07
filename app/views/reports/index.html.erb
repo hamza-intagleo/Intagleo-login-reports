@@ -1,0 +1,134 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Intagleo Report</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <%= link_to "Home", root_path, :class => "nav-link" %>
+      </li>
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" href="#">Link</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link disabled" href="#">Disabled</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item dropdown">-->
+<!--        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>-->
+<!--        <div class="dropdown-menu" aria-labelledby="dropdown01">-->
+<!--          <a class="dropdown-item" href="#">Action</a>-->
+<!--          <a class="dropdown-item" href="#">Another action</a>-->
+<!--          <a class="dropdown-item" href="#">Something else here</a>-->
+<!--        </div>-->
+<!--      </li>-->
+    </ul>
+
+  </div>
+</nav>
+
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+
+
+
+  <div class="container mt-5">
+    <!-- Example row of columns -->
+    <form accept-charset="UTF-8" action=<%= search_by_dates_reports_path %> method="get">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" class="form-control datepicker" name="start_date" placeholder="Start date">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+
+            <input type="text" class="form-control datepicker" name="end_date" placeholder="End date">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="row mt-5 mb-4">
+        <div class="col-md-6">
+          <h2 >Report</h2>
+          <span style="color: #666666">1- Negative value means more time in HR Sheet then Network Logs time</span><br>
+          <span style="color: #666666">2- Red means difference is more than 2 hours</span>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+
+            <input type="text" class="form-control" id="inputEmail4" placeholder="Search by name">
+          </div>
+        </div>
+      </div>
+    </form>
+    <!--         -->
+    <div class="row">
+      <div class="col-md-12">
+
+        <table class="table table-hover table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Time from Network Sheet</th>
+            <th scope="col">Time from HR Sheet</th>
+            <th scope="col">Report Date</th>
+            <th scope="col">Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @reports.each_with_index do |report,index|  %>
+          <tr>
+
+            <% r = Report.find_by(emp_id: report.emp_id,report_date: report.report_date, source: "HR Sheet") %>
+            <td><%= index+1 %></td>
+            <td><%= report.emp_id %></td>
+            <td><%= EmployeeDatum.find_by(employee_id: report.emp_id).name %></td>
+            <td><%= report.time_in_office.round(1) %></td>
+            <td><%= r.time_in_office.round(1) if r.present? %></td>
+            <td><%= report.report_date %></td>
+            <td>
+              <% diff = report.time_in_office - r.time_in_office %>
+              <% if r.time_in_office == nil || r.time_in_office == 0 %>
+              -
+              <% elsif diff < -2 %>
+                <button class="btn btn-danger btn-sm" ><%= diff.round(1) %></button>
+              <% else %>
+                <%= diff.round(1) %>
+              <% end %>
+            </td>
+          </tr>
+            <% end %>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <hr>
+
+  </div> <!-- /container -->
+
+</main>
+
+<footer class="container">
+  <p>&copy; Company 2019</p>
+</footer>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.datepicker').datepicker();
+    });
+</script>

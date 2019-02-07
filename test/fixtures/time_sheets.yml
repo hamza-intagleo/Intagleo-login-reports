@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: time_sheets
+#
+#  id                :integer          not null, primary key
+#  date              :date
+#  employee_datum_id :integer
+#  productive_hours  :float
+#  task_description  :string
+#  break_hours       :float
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2019-01-29
+  employee_datum: one
+  productive_hours: 1.5
+  task_description: MyString
+  break_hours: 1.5
+
+two:
+  date: 2019-01-29
+  employee_datum: two
+  productive_hours: 1.5
+  task_description: MyString
+  break_hours: 1.5

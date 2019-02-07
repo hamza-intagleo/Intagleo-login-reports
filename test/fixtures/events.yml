@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id                :integer          not null, primary key
+#  emp_id            :string
+#  employee_datum_id :integer
+#  login_time        :datetime
+#  login_date        :date
+#  event_type        :string
+#  event_id          :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  emp_id: MyString
+  employee_datum: one
+  login_time: 2019-01-29 17:14:06
+  login_date: 2019-01-29
+  type: 
+  event_id: 1
+
+two:
+  emp_id: MyString
+  employee_datum: two
+  login_time: 2019-01-29 17:14:06
+  login_date: 2019-01-29
+  type: 
+  event_id: 1
