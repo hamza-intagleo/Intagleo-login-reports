@@ -2,6 +2,7 @@ class ReportsController < ApplicationController
   def index
     @reports = Report.where(source: "Network Sheet")
   end
+  
   def search_by_dates
     if params[:start_date].present? && params[:end_date]
       startDate = params[:start_date].split('/')

@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190130115230) do
+ActiveRecord::Schema.define(version: 20190207120501) do
 
-  create_table "employee_data", force: :cascade do |t|
+  create_table "employee_data", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "employee_id"
     t.string   "designation"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20190130115230) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "emp_id"
     t.integer  "employee_datum_id"
     t.datetime "login_time"
@@ -31,28 +31,40 @@ ActiveRecord::Schema.define(version: 20190130115230) do
     t.integer  "event_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.index ["employee_datum_id"], name: "index_events_on_employee_datum_id"
+    t.index ["employee_datum_id"], name: "index_events_on_employee_datum_id", using: :btree
   end
 
-  create_table "reports", force: :cascade do |t|
+  create_table "hrm_employee_data", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "emp_firstname"
+    t.string   "emp_lastname"
+    t.string   "employee_id"
+    t.datetime "punch_in_utc_time"
+    t.datetime "punch_out_utc_time"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "reports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "emp_id"
-    t.float    "time_in_office"
-    t.float    "time_out_office"
+    t.float    "time_in_office",  limit: 24
+    t.float    "time_out_office", limit: 24
     t.string   "source"
     t.date     "report_date"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
-  create_table "time_sheets", force: :cascade do |t|
+  create_table "time_sheets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "date"
     t.integer  "employee_datum_id"
-    t.float    "productive_hours"
+    t.float    "productive_hours",  limit: 24
     t.string   "task_description"
-    t.float    "break_hours"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.index ["employee_datum_id"], name: "index_time_sheets_on_employee_datum_id"
+    t.float    "break_hours",       limit: 24
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["employee_datum_id"], name: "index_time_sheets_on_employee_datum_id", using: :btree
   end
 
+  add_foreign_key "events", "employee_data"
+  add_foreign_key "time_sheets", "employee_data"
 end

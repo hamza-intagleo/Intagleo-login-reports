@@ -1,0 +1,2 @@
+class HrmEmployeeDatum < ApplicationRecord
+end
