@@ -1,0 +1,2 @@
+class LoginFile < ApplicationRecord
+end

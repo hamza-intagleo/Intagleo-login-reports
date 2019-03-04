@@ -36,11 +36,11 @@
 
   <div class="container mt-5">
     <!-- Example row of columns -->
-    <form accept-charset="UTF-8" action=<%= search_by_dates_reports_path %> method="get">
+    <form accept-charset="UTF-8" action=<%= search_by_dates_reports_path %> method="get" autocomplete="off">
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <input type="text" class="form-control datepicker" name="start_date" placeholder="Start date">
+            <input type="text" class="form-control datepicker " name="start_date" placeholder="Start date">
           </div>
         </div>
         <div class="col-md-6">
@@ -59,17 +59,22 @@
 
       </div>
       <div class="row mt-5 mb-4">
-        <div class="col-md-6">
-          <h2 >Report</h2>
-          <span style="color: #666666">1- Negative value means more time in HR Sheet then Network Logs time</span><br>
-          <span style="color: #666666">2- Red means difference is more than 2 hours</span>
+        <div class="col-md-9" >
+          <h2 class="mb-4" >Report</h2>
+          <span style="color: #666666">1- Too high value in HRM attendance column means resource forgot to log out</span><br>
+          <span style="color: #666666">2- Too high value in HR sheet means resource did not follow standard pattern of HR time sheet</span><br>
+          <span style="color: #666666">3- We have handled night shift resources in our algorithm.</span><br>
+          <span style="color: #666666">4- Not all resources are covered because javed is still working on network logs of all employees</span><br>
+          <span style="color: #666666">5- No data will be shown if network time is unavailable for a day</span>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
           <div class="form-group">
 
-            <input type="text" class="form-control" id="inputEmail4" placeholder="Search by name">
+<!--            <input type="text" class="form-control" id="inputEmail4" placeholder="Search by name">-->
           </div>
+          <div style="float: right"><%= link_to "Generate Report", generate_sheet_reports_path ,:class => "btn btn-primary btn-sm"%></div>
         </div>
+
       </div>
     </form>
     <!--         -->
@@ -82,35 +87,62 @@
             <th scope="col">S.No</th>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
-            <th scope="col">Time from Network Sheet</th>
-            <th scope="col">Time from HR Sheet</th>
+            <th scope="col">HR Sheet Time</th>
+            <th scope="col">Network Sheet Time</th>
+            <th scope="col">HRM Attendance Total Time</th>
             <th scope="col">Report Date</th>
             <th scope="col">Status</th>
           </tr>
           </thead>
           <tbody>
-          <% @reports.each_with_index do |report,index|  %>
-          <tr>
 
-            <% r = Report.find_by(emp_id: report.emp_id,report_date: report.report_date, source: "HR Sheet") %>
-            <td><%= index+1 %></td>
-            <td><%= report.emp_id %></td>
-            <td><%= EmployeeDatum.find_by(employee_id: report.emp_id).name %></td>
-            <td><%= report.time_in_office.round(1) %></td>
-            <td><%= r.time_in_office.round(1) if r.present? %></td>
-            <td><%= report.report_date %></td>
-            <td>
-              <% diff = report.time_in_office - r.time_in_office %>
-              <% if r.time_in_office == nil || r.time_in_office == 0 %>
-              -
-              <% elsif diff < -2 %>
-                <button class="btn btn-danger btn-sm" ><%= diff.round(1) %></button>
-              <% else %>
-                <%= diff.round(1) %>
-              <% end %>
-            </td>
-          </tr>
+          <% sr = 0 %>
+          <% (@start_Date..@end_date).each do |date_report| %>
+            <% @employees.each do |emp| %>
+              <% r1 = Report.find_by(emp_id: emp.employee_id,report_date: date_report, source: "HR Sheet") %>
+              <% r2 = Report.find_by(emp_id: emp.employee_id,report_date: date_report, source: "Network Sheet") %>
+              <% r3 = Report.find_by(emp_id: emp.employee_id,report_date: date_report, source: "HRM_ATTENDENCE") %>
+              <% next unless r1.present? || r2.present? || r3.present? %>
+              <tr><% sr = sr + 1 %>
+              <td><%= sr %></td>
+              <td><%= emp.employee_id %></td>
+              <td><%= emp.name %></td>
+              <td><%= r1.time_in_office.round(1) if r1.present? %></td>
+              <td><%= r2.time_in_office.round(1) if r2.present? %></td>
+              <td><%= r3.time_in_office if r3.present? %></td>
+              <td><%= date_report %></td>
+              <td>
+                <%
+                  diff = nil
+                  if r1.present? && r1.time_in_office != 0
+                    if r2.present? && r2.time_in_office - r1.time_in_office <= -2 && r2.time_in_office != 0
+                      diff = r2.time_in_office - r1.time_in_office
+                    else
+                      if r3.present?
+                        if (r3.time_in_office.round(1) - r1.time_in_office) <= -2 && r3.time_in_office != 0
+                          diff = r3.time_in_office.round(1) - r1.time_in_office
+                        end
+                      end
+                    end
+                  else
+                    if r3.present? && r2.present?
+                      if (r2.time_in_office.round(1) - r3.time_in_office) <= -3 && r2.time_in_office != 0
+                        diff = r2.time_in_office.round(1) - r3.time_in_office
+                      end
+                    end
+                  end
+                %>
+                <% if diff.present? %>
+                  <button class="btn btn-danger btn-sm" ><%= diff.round(1) if diff.present? %></button>
+                <% else %>
+                -
+                <% end %>
+              </td>
+
+              </tr>
             <% end %>
+          <% end %>
+
 
           </tbody>
         </table>

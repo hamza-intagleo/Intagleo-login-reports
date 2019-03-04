@@ -1,6 +1,13 @@
 class ReportsController < ApplicationController
+  require 'rubygems'
+  require 'write_xlsx'
   def index
-    @reports = Report.where(source: "Network Sheet")
+    # @reports = Report.group(report_date,emp_id).order('report_date asc')
+    # @reports = Report.order('report_date asc').group_by{|rep| [rep.report_date, rep.emp_id,rep.source]}
+    @start_Date = ('2019-01-07').to_date
+    @end_date = ('2019-02-09').to_date
+    @employees = EmployeeDatum.all
+
   end
   
   def search_by_dates
@@ -13,8 +20,141 @@ class ReportsController < ApplicationController
       month2 = startDate[0] rescue ""
       day2 = startDate[1] rescue ""
       year2 = startDate[2] rescue ""
-      @reports = Report.where(report_date: year+"-"+month+"-"+day...year2+"-"+month2+"-"+((day2.to_i) +1).to_s,source: "Network Sheet")
+      @start_Date = (day +"-" + month +"-" + year).to_date
+      @end_date = (day2 +"-" + month2 +"-" + year2).to_date
+      @employees = EmployeeDatum.all
+      # @reports = Report.where(report_date: year+"-"+month+"-"+day...year2+"-"+month2+"-"+((day2.to_i) +1).to_s,source: "Network Sheet")
     end
     render 'index'
+  end
+  def generate_sheet
+
+    @start_Date = ('2019-01-01').to_date
+    @employees = EmployeeDatum.all
+
+    (@start_Date..Date.today).each do |date_report|
+      filenam = date_report.to_s
+      workbook = WriteXLSX.new("public/Reports/intagleo report "+ filenam +".xlsx")
+      worksheet = workbook.add_worksheet
+      format = workbook.add_format
+      format2 = workbook.add_format
+      row = 2
+      format.set_bold
+      format2.set_color('red')
+      worksheet.write(0, 0, "ID",format)
+      worksheet.write(0, 1, "Name",format)
+      worksheet.write(0, 2, "HR Sheet Time",format)
+      worksheet.write(0, 3, "Network Sheet Time",format)
+      worksheet.write(0, 4, "HRM Attendance Total Time",format)
+      worksheet.write(0, 5, "Report Date",format)
+      worksheet.write(0, 6, "Status",format)
+      @employees.each do |emp|
+        r1 = Report.find_by(emp_id: emp.employee_id,report_date: date_report, source: "HR Sheet")
+        r2 = Report.find_by(emp_id: emp.employee_id,report_date: date_report, source: "Network Sheet")
+        r3 = Report.find_by(emp_id: emp.employee_id,report_date: date_report, source: "HRM_ATTENDENCE")
+        next unless r1.present? || r2.present? || r3.present?
+
+
+        worksheet.write(row, 0, emp.employee_id)
+        worksheet.write(row, 1, emp.name)
+        if r1.present?
+          worksheet.write(row, 2, r1.time_in_office.round(1))
+        end
+        if r2.present?
+          worksheet.write(row, 3, r2.time_in_office.round(1))
+        end
+        if r3.present?
+          worksheet.write(row, 4, r3.time_in_office)
+        end
+        worksheet.write(row, 5, date_report)
+        diff = nil
+        if r1.present? && r1.time_in_office != 0
+          if r2.present? && r2.time_in_office - r1.time_in_office <= -2 && r2.time_in_office != 0
+            diff = r2.time_in_office - r1.time_in_office
+          else
+            if r3.present?
+              if (r3.time_in_office.round(1) - r1.time_in_office) <= -2 && r3.time_in_office != 0
+                diff = r3.time_in_office.round(1) - r1.time_in_office
+              end
+            end
+          end
+        else
+          if r3.present? && r2.present?
+            if (r2.time_in_office.round(1) - r3.time_in_office) <= -3 && r2.time_in_office != 0
+              diff = r2.time_in_office.round(1) - r3.time_in_office
+            end
+          end
+        end
+        if diff.present?
+          worksheet.write(row, 6, diff, format2)
+        end
+        row = row + 1
+      end
+      workbook.close
+    end
+
+
+    # ============old code=============
+    # workbook = WriteXLSX.new('intagleo report.xlsx')
+    # worksheet = workbook.add_worksheet
+    # format = workbook.add_format
+    # format2 = workbook.add_format
+    # row = 2
+    # format.set_bold
+    # format2.set_color('red')
+    # worksheet.write(0, 0, "ID",format)
+    # worksheet.write(0, 1, "Name",format)
+    # worksheet.write(0, 2, "Network Sheet Time",format)
+    # worksheet.write(0, 3, "HR Sheet Time",format)
+    # worksheet.write(0, 4, "HRM Attendance Total Time",format)
+    # worksheet.write(0, 5, "Report Date",format)
+    # worksheet.write(0, 6, "Status",format)
+    # reports = Report.where(source: "Network Sheet")
+    # reports.each_with_index do |report,index|
+    #   r1 = Report.find_by(emp_id: report.emp_id,report_date: report.report_date, source: "HR Sheet")
+    #   r2 = Report.find_by(emp_id: report.emp_id,report_date: report.report_date, source: "HRM_ATTENDENCE")
+    #
+    #   worksheet.write(row, 0, report.emp_id)
+    #   worksheet.write(row, 1, EmployeeDatum.find_by(employee_id: report.emp_id).name)
+    #   worksheet.write(row, 2, report.time_in_office.round(1))
+    #   if r1.present?
+    #     worksheet.write(row, 3, r1.time_in_office.round(1))
+    #   end
+    #   if r2.present?
+    #     worksheet.write(row, 4, r2.time_in_office)
+    #   end
+    #   worksheet.write(row, 5, report.report_date)
+    #   if r1.present?
+    #     if report.time_in_office - r1.time_in_office < -2 && report.time_in_office != 0
+    #       worksheet.write(row, 6, (report.time_in_office - r1.time_in_office).round(1),format2)
+    #     else
+    #       if r2.present?
+    #         if (report.time_in_office.round(1) - r2.time_in_office) < -3 && report.time_in_office != 0
+    #           worksheet.write(row, 6, (report.time_in_office - r2.time_in_office).round(1),format2)
+    #         else
+    #           if r1.time_in_office - r2.time_in_office <-3 && r1.time_in_office != 0
+    #             worksheet.write(row, 6, (r1.time_in_office - r2.time_in_office).round(1),format2)
+    #           end
+    #         end
+    #       end
+    #     end
+    #   else
+    #     if r2.present?
+    #       if (report.time_in_office.round(1) - r2.time_in_office) < -3 && report.time_in_office != 0
+    #         worksheet.write(row, 6, (report.time_in_office - r2.time_in_office).round(1),format2)
+    #       end
+    #     end
+    #   end
+    #   # if r2.present?
+    #   #   if (report.time_in_office.round(1) - r2.time_in_office) < -3
+    #   #     format2.set_color('red')
+    #   #     worksheet.write(row,0, format2)
+    #   #   end
+    #   # end
+    #   row = row + 1
+    # end
+    # workbook.close
+    redirect_to root_path
+
   end
 end

@@ -4,6 +4,8 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
+gem 'write_xlsx'
+gem 'jquery-ui-rails'
 gem 'bootstrap', '~> 4.2.1'
 gem 'jquery-datatables-rails', '~> 3.4.0'
 gem 'bootstrap-datepicker-rails'
