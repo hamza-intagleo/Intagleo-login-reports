@@ -9,6 +9,11 @@
       <li class="nav-item active">
         <%= link_to "Home", root_path, :class => "nav-link" %>
       </li>
+      <% if user_signed_in? %>
+        <li class="nav-item pull-right">
+          <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>  
+        </li>
+      <% end %>
 <!--      <li class="nav-item">-->
 <!--        <a class="nav-link" href="#">Link</a>-->
 <!--      </li>-->
@@ -36,29 +41,29 @@
 
   <div class="container mt-5">
     <!-- Example row of columns -->
-    <form accept-charset="UTF-8" action=<%= search_by_dates_reports_path %> method="get" autocomplete="off">
+    <form accept-charset="UTF-8" action=<%= reports_path %> method="get" autocomplete="off">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
           <div class="form-group">
-            <input type="text" class="form-control datepicker " name="start_date" placeholder="Start date">
+            <input type="text" class="form-control datepicker " name="start_date" placeholder="Start date" value = "<%= params[:start_date].present? ? params[:start_date] : '' %>">
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
           <div class="form-group">
 
-            <input type="text" class="form-control datepicker" name="end_date" placeholder="End date">
+            <input type="text" class="form-control datepicker" name="end_date" placeholder="End date", value= "<%= params[:end_date].present? ? params[:end_date] : '' %>">
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 text-right">
+
+        <div class="col-md-2">
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </div>
-
       </div>
-      <div class="row mt-5 mb-4">
+      
+      <hr>
+      <div class="row mt-4 mb-4">
         <div class="col-md-9" >
           <h2 class="mb-4" >Report</h2>
           <span style="color: #666666">1- Too high value in HRM attendance column means resource forgot to log out</span><br>
@@ -67,14 +72,20 @@
           <span style="color: #666666">4- Not all resources are covered because javed is still working on network logs of all employees</span><br>
           <span style="color: #666666">5- No data will be shown if network time is unavailable for a day</span>
         </div>
+      </div>
+
+      <hr>
+      
+      <div class="row mt-4 mb-2">
         <div class="col-md-3">
           <div class="form-group">
-
-<!--            <input type="text" class="form-control" id="inputEmail4" placeholder="Search by name">-->
+            <input type="text" class="form-control" id="inputEmail4" placeholder="Search by name" name="search_name" value = "<%= params[:search_name].present? ? params[:search_name] : '' %>">
           </div>
-          <div style="float: right"><%= link_to "Generate Report", generate_sheet_reports_path ,:class => "btn btn-primary btn-sm"%></div>
         </div>
 
+        <div class="col-md-9">
+          <div style="float: right"><%= link_to "Generate Report", generate_sheet_reports_path ,:class => "btn btn-primary btn-sm"%></div>
+        </div> 
       </div>
     </form>
     <!--         -->

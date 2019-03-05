@@ -1,12 +1,31 @@
 class ReportsController < ApplicationController
+  before_action :authenticate_user!
   require 'rubygems'
   require 'write_xlsx'
   def index
+    if params[:start_date].present? && params[:end_date].present?
+      startDate = params[:start_date].split('/')
+      month = startDate[0] rescue ""
+      day = startDate[1] rescue ""
+      year = startDate[2] rescue ""
+      startDate = params[:end_date].split('/')
+      month2 = startDate[0] rescue ""
+      day2 = startDate[1] rescue ""
+      year2 = startDate[2] rescue ""
+      @start_Date = (day +"-" + month +"-" + year).to_date
+      @end_date = (day2 +"-" + month2 +"-" + year2).to_date
+      # @reports = Report.where(report_date: year+"-"+month+"-"+day...year2+"-"+month2+"-"+((day2.to_i) +1).to_s,source: "Network Sheet")
+    else
+      @start_Date = ('2019-01-07').to_date
+      @end_date = ('2019-02-09').to_date
+    end
+    if params[:search_name].present?
+      @employees = EmployeeDatum.where("name LIKE ?", "%#{params[:search_name]}%")
+    else
+      @employees = EmployeeDatum.all
+    end
     # @reports = Report.group(report_date,emp_id).order('report_date asc')
     # @reports = Report.order('report_date asc').group_by{|rep| [rep.report_date, rep.emp_id,rep.source]}
-    @start_Date = ('2019-01-07').to_date
-    @end_date = ('2019-02-09').to_date
-    @employees = EmployeeDatum.all
 
   end
   
@@ -27,6 +46,7 @@ class ReportsController < ApplicationController
     end
     render 'index'
   end
+
   def generate_sheet
 
     @start_Date = ('2019-01-01').to_date

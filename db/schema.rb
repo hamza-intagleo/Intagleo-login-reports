@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190207120501) do
+ActiveRecord::Schema.define(version: 20190305102715) do
 
   create_table "employee_data", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -38,10 +38,16 @@ ActiveRecord::Schema.define(version: 20190207120501) do
     t.string   "emp_firstname"
     t.string   "emp_lastname"
     t.string   "employee_id"
-    t.datetime "punch_in_utc_time"
-    t.datetime "punch_out_utc_time"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "punch_in_user_time"
+    t.datetime "punch_out_user_time"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  create_table "login_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "filename"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -63,6 +69,18 @@ ActiveRecord::Schema.define(version: 20190207120501) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.index ["employee_datum_id"], name: "index_time_sheets_on_employee_datum_id", using: :btree
+  end
+
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
   add_foreign_key "events", "employee_data"
