@@ -29,7 +29,7 @@ namespace :import_loginDetail do
                     e = Event.new
                     begin
                       employee_id = d[0].split('=')[1]
-                      employee_id = employee_id[0..employee_id.length-2]
+                      employee_id = employee_id[0..employee_id.length-2].upcase
                       dateAndTime = d[1].split(" ")
                       dateSplit = dateAndTime[0]
                       timeSplit = dateAndTime[1]
@@ -80,7 +80,7 @@ namespace :import_loginDetail do
                     event.each_with_index do |cal,index|
                       if loopStarter
                         unless event[index] == nil
-                          if event[index].event_type == "System was Locked" || event[index].event_type == "System Shutdown" || event[index].event_type == "User initiated logoff" || event[index].event_type == "Logoff"
+                          if event[index].event_type == "System was Locked" || event[index].event_type == "System Shutdown" || event[index].event_type == "User initiated logoff" || event[index].event_type == "Logoff" || event[index+1].event_type == "Windows is shutting down"
                             if event[index].login_time < previous_Time
                               productiveHours = productiveHours + ((((event[index].login_time) - previous_Time)/3600)+24)
                             else
@@ -90,11 +90,11 @@ namespace :import_loginDetail do
                           end
                         end
                       end
-                      if (cal.event_type == "Logon" || cal.event_type == "System was UnLock" || cal.event_type == "System Startup" ) && !loopStarter && cal.present?
+                      if (cal.event_type == "Logon" || cal.event_type == "System was UnLock" || cal.event_type == "System Startup" || cal.event_type == "Successful Network Logon" || cal.event_type == "RDP login" || cal.event_type == "Windows is starting up" ) && !loopStarter && cal.present?
                         if event[index].event_type == "System was UnLock"
                         end
                         unless event[index+1] == nil
-                          if event[index+1].event_type == "System was Locked" || event[index+1].event_type == "System Shutdown" || event[index+1].event_type == "User initiated logoff" || event[index+1].event_type == "Logoff"
+                          if event[index+1].event_type == "System was Locked" || event[index+1].event_type == "System Shutdown" || event[index+1].event_type == "User initiated logoff" || event[index+1].event_type == "Logoff" || event[index+1].event_type == "Windows is shutting down"
                             if event[index+1].login_time < event[index].login_time
                               productiveHours = productiveHours + (((event[index+1].login_time - event[index].login_time)/3600)+24)
                             else

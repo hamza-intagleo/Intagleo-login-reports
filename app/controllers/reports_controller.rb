@@ -2,6 +2,8 @@ class ReportsController < ApplicationController
   before_action :authenticate_user!
   require 'rubygems'
   require 'write_xlsx'
+  require 'rubygems'
+  require 'zip'
   def index
     if params[:start_date].present? && params[:end_date].present?
       startDate = params[:start_date].split('/')
@@ -16,13 +18,13 @@ class ReportsController < ApplicationController
       @end_date = (day2 +"-" + month2 +"-" + year2).to_date
       # @reports = Report.where(report_date: year+"-"+month+"-"+day...year2+"-"+month2+"-"+((day2.to_i) +1).to_s,source: "Network Sheet")
     else
-      @start_Date = ('2019-01-07').to_date
-      @end_date = ('2019-02-09').to_date
+      @start_Date = ('2019-02-25').to_date
+      @end_date = ('2019-02-28').to_date
     end
     if params[:search_name].present?
       @employees = EmployeeDatum.where("name LIKE ?", "%#{params[:search_name]}%")
     else
-      @employees = EmployeeDatum.all
+      @employees = EmployeeDatum.all.order("employee_id")
     end
     # @reports = Report.group(report_date,emp_id).order('report_date asc')
     # @reports = Report.order('report_date asc').group_by{|rep| [rep.report_date, rep.emp_id,rep.source]}
@@ -49,10 +51,11 @@ class ReportsController < ApplicationController
 
   def generate_sheet
 
-    @start_Date = ('2019-01-01').to_date
-    @employees = EmployeeDatum.all
+    @start_Date = ('2019-01-07').to_date
+    @end_Date = ('2019-02-28').to_date
+    @employees = EmployeeDatum.all.order("employee_id")
 
-    (@start_Date..Date.today).each do |date_report|
+    (@start_Date..@end_Date).each do |date_report|
       filenam = date_report.to_s
       workbook = WriteXLSX.new("public/Reports/intagleo report "+ filenam +".xlsx")
       worksheet = workbook.add_worksheet
@@ -72,19 +75,34 @@ class ReportsController < ApplicationController
         r1 = Report.find_by(emp_id: emp.employee_id,report_date: date_report, source: "HR Sheet")
         r2 = Report.find_by(emp_id: emp.employee_id,report_date: date_report, source: "Network Sheet")
         r3 = Report.find_by(emp_id: emp.employee_id,report_date: date_report, source: "HRM_ATTENDENCE")
-        next unless r1.present? || r2.present? || r3.present?
+        # next unless r1.present? || r2.present? || r3.present?
 
 
         worksheet.write(row, 0, emp.employee_id)
         worksheet.write(row, 1, emp.name)
         if r1.present?
-          worksheet.write(row, 2, r1.time_in_office.round(1))
+          if r1.time_in_office > 0 && r1.time_in_office <= 3
+            worksheet.write(row, 2, r1.time_in_office.round(1),format2)
+          else
+            worksheet.write(row, 2, r1.time_in_office.round(1))
+          end
+
         end
         if r2.present?
-          worksheet.write(row, 3, r2.time_in_office.round(1))
+          if r2.time_in_office > 0 && r2.time_in_office <= 3
+            worksheet.write(row, 3, r2.time_in_office.round(1),format2)
+          else
+            worksheet.write(row, 3, r2.time_in_office.round(1))
+          end
+
         end
         if r3.present?
-          worksheet.write(row, 4, r3.time_in_office)
+          if r3.time_in_office > 0 && r3.time_in_office <= 3
+            worksheet.write(row, 4, r3.time_in_office,format2)
+          else
+            worksheet.write(row, 4, r3.time_in_office)
+          end
+
         end
         worksheet.write(row, 5, date_report)
         diff = nil
@@ -112,6 +130,23 @@ class ReportsController < ApplicationController
       end
       workbook.close
     end
+
+
+
+    folder = "public"
+    filename = 'Intagleo_Reports.zip'
+    temp_file = Tempfile.new(filename)
+
+    reportFiles = Dir.entries('public/Reports')
+    Zip::File.open(temp_file.path, Zip::File::CREATE) do |zip_file|
+      reportFiles.each do |d|
+        unless d == "." || d == ".."
+          zip_file.add(d,"public/Reports/"+d)
+        end
+      end
+    end
+    zip_data = File.read(temp_file.path)
+    send_data(zip_data, :type => 'application/zip', :filename => filename)
 
 
     # ============old code=============
@@ -174,7 +209,7 @@ class ReportsController < ApplicationController
     #   row = row + 1
     # end
     # workbook.close
-    redirect_to root_path
+    # redirect_to root_path
 
   end
 end

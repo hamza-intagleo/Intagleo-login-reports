@@ -45,19 +45,19 @@
       <div class="row">
         <div class="col-md-5">
           <div class="form-group">
-            <input type="text" class="form-control datepicker " name="start_date" placeholder="Start date" value = "<%= params[:start_date].present? ? params[:start_date] : '' %>">
+            <input type="text" class="form-control datepicker " name="start_date" id="start_date" placeholder="Start date" value = "<%= params[:start_date].present? ? params[:start_date] : '' %>">
           </div>
         </div>
         <div class="col-md-5">
           <div class="form-group">
 
-            <input type="text" class="form-control datepicker" name="end_date" placeholder="End date", value= "<%= params[:end_date].present? ? params[:end_date] : '' %>">
+            <input type="text" class="form-control datepicker" name="end_date" id="end_date" placeholder="End date", value= "<%= params[:end_date].present? ? params[:end_date] : '' %>">
           </div>
         </div>
 
         <div class="col-md-2">
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" id="search_button">Submit</button>
           </div>
         </div>
       </div>
@@ -66,25 +66,25 @@
       <div class="row mt-4 mb-4">
         <div class="col-md-9" >
           <h2 class="mb-4" >Report</h2>
-          <span style="color: #666666">1- Too high value in HRM attendance column means resource forgot to log out</span><br>
-          <span style="color: #666666">2- Too high value in HR sheet means resource did not follow standard pattern of HR time sheet</span><br>
+          <span style="color: #666666">1- Too high value in HRM attendance column means resource forgot to log out.</span><br>
+          <span style="color: #666666">2- Too high value in HR sheet means resource did not follow standard pattern of HR time sheet.</span><br>
           <span style="color: #666666">3- We have handled night shift resources in our algorithm.</span><br>
-          <span style="color: #666666">4- Not all resources are covered because javed is still working on network logs of all employees</span><br>
-          <span style="color: #666666">5- No data will be shown if network time is unavailable for a day</span>
+          <span style="color: #666666">4- Not all resources are covered because javed is still working on network logs of all employees.</span><br>
+          <span style="color: #666666">5- No data will be shown if network time is unavailable for a day.</span>
         </div>
       </div>
 
       <hr>
-      
+
       <div class="row mt-4 mb-2">
         <div class="col-md-3">
           <div class="form-group">
-            <input type="text" class="form-control" id="inputEmail4" placeholder="Search by name" name="search_name" value = "<%= params[:search_name].present? ? params[:search_name] : '' %>">
+            <input type="text" class="form-control" id="search_name" placeholder="Search by name" name="search_name" value = "<%= params[:search_name].present? ? params[:search_name] : '' %>">
           </div>
         </div>
 
         <div class="col-md-9">
-          <div style="float: right"><%= link_to "Generate Report", generate_sheet_reports_path ,:class => "btn btn-primary btn-sm"%></div>
+          <div style="float: right"><%= link_to "Generate Report", generate_sheet_reports_path ,:class => "btn btn-primary btn-sm" , :id => "generate_report" %></div>
         </div> 
       </div>
     </form>
@@ -113,14 +113,14 @@
               <% r1 = Report.find_by(emp_id: emp.employee_id,report_date: date_report, source: "HR Sheet") %>
               <% r2 = Report.find_by(emp_id: emp.employee_id,report_date: date_report, source: "Network Sheet") %>
               <% r3 = Report.find_by(emp_id: emp.employee_id,report_date: date_report, source: "HRM_ATTENDENCE") %>
-              <% next unless r1.present? || r2.present? || r3.present? %>
+              <%# next unless r1.present? || r2.present? || r3.present? %>
               <tr><% sr = sr + 1 %>
               <td><%= sr %></td>
               <td><%= emp.employee_id %></td>
               <td><%= emp.name %></td>
-              <td><%= r1.time_in_office.round(1) if r1.present? %></td>
-              <td><%= r2.time_in_office.round(1) if r2.present? %></td>
-              <td><%= r3.time_in_office if r3.present? %></td>
+              <td <% if (r1.present?) && (r1.time_in_office > 0 && r1.time_in_office <= 3)%>style = "background: red;" <% end  %> ><%= r1.time_in_office.round(1) if r1.present? %></td>
+              <td <% if (r2.present?) && (r2.time_in_office > 0 && r2.time_in_office <= 3)%>style = "background: red;" <% end  %> ><%= r2.time_in_office.round(1) if r2.present? %></td>
+              <td <% if (r3.present?) && (r3.time_in_office > 0 && r3.time_in_office <= 3)%>style = "background: red;" <% end  %> ><%= r3.time_in_office if r3.present? %></td>
               <td><%= date_report %></td>
               <td>
                 <%
@@ -172,6 +172,36 @@
 </footer>
 <script type="text/javascript">
     $(document).ready(function(){
+        $('#page-loader').hide();
+
         $('.datepicker').datepicker();
+    });
+    $( "#generate_report" ).click(function() {
+        alert("Your downloading will begin shortly");
+        // $('#page-loader').show();
+    });
+    $( "#search_button" ).click(function() {
+        $('#page-loader').show();
+    if ($('#start_date').val() == "" && $('#end_date').val() == "" && $('#search_name').val() == "")
+    {
+        alert("Please enter name or date");
+        $('#page-loader').hide();
+        return false;
+    }
+    if (($('#end_date').val() == "" || $('#start_date').val() == "") && $('#search_name').val() == "")
+    {
+        if ($('#end_date').val() == "")
+        {
+            alert("Please enter end date");
+            $('#page-loader').hide();
+            return false;
+        }
+        if ($('#start_date').val() == "")
+        {
+            alert("Please enter start date");
+            $('#page-loader').hide();
+            return false;
+        }
+    }
     });
 </script>

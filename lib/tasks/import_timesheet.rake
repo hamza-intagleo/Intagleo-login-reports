@@ -15,7 +15,7 @@ namespace :import_time_sheet do
             files.each do |file|
               begin
               loginFiles = LoginFile.find_by(filename: file)
-              unless (file == '.' || file == '..') || (loginFiles.present?)
+              unless (file == '.' || file == '..')
                 xlsx = Roo::Spreadsheet.open("public/Hr Sheets/"+ month + "/" + filesheets + "/" +file)
                 datas = xlsx.sheets
                 datas.each_with_index do |da,index|
@@ -26,16 +26,17 @@ namespace :import_time_sheet do
                     emp_id = nil
                     checkFlag = true
                     temporaryDate = nil
+                    update_time = true
                     data.each_with_index do |d,index|
                         begin
                         unless index == 0 && index <3
                           # for column 1
                           if d[0] == "Employee Name:"
                             if d[2].present?
-                              emp.name = d[2]
+                              emp.name = d[2].upcase
                               puts "name ",d[2]
                             else
-                              emp.name = d[1]
+                              emp.name = d[1].upcase
                             end
                           elsif d[0] == "Designation:"
                             if d[2].present?
@@ -63,6 +64,7 @@ namespace :import_time_sheet do
                           if ed.present?
                             emp_id = ed.id
                           else
+                            emp.employee_id = ""
                             emp.save
                             emp_id = emp.id
                           end
@@ -72,10 +74,12 @@ namespace :import_time_sheet do
                         end
                         rp = Report.new
                         if index > 5
+
                           if d[1].present?
                             temporaryDate = d[1]
                           end
                           unless d[2].to_s == "Days Total" || d[2].to_s == " Total" || d[2].to_s.include?("Total")
+
                             if d[1].present?
                               # if file == "Timesheet - 201902 - IS308 - Haroon Shahzaib Nasir.xlsx"
                               #   byebug
@@ -88,6 +92,10 @@ namespace :import_time_sheet do
                               ts = TimeSheet.find_by(date: sheetDate,employee_datum_id: emp_id)
                               if ts.present?
                                 if d[3].present?
+                                  if update_time
+                                    ts.productive_hours = 0.0
+                                    update_time = false
+                                  end
                                   ts.productive_hours = ts.productive_hours + (d[3].to_f / 3600)
                                 end
                                 ts.save
@@ -106,10 +114,15 @@ namespace :import_time_sheet do
                                 ts.save
                               end
                             else
-                              ts = TimeSheet.where(employee_datum_id: emp_id).last
+                              ts = TimeSheet.find_by(date: temporaryDate,employee_datum_id: emp_id)
+                              # ts = TimeSheet.where(employee_datum_id: emp_id).last
                               if ts.present?
                                 ts.date = ts.date
                                 if d[3].present?
+                                  if update_time
+                                    ts.productive_hours = 0.0
+                                    update_time = false
+                                  end
                                   ts.productive_hours = ts.productive_hours + (d[3].to_f / 3600)
                                 end
                                 ts.employee_datum_id = emp_id
@@ -117,12 +130,18 @@ namespace :import_time_sheet do
                               end
                             end
                           else
-
+                            update_time = true
                             # if file == "Timesheet - 201902 - IS308 - Haroon Shahzaib Nasir.xlsx"
                             #   byebug
                             # end
-                            ts = TimeSheet.where(employee_datum_id: emp_id).last
-
+                            ts = TimeSheet.find_by(date: temporaryDate,employee_datum_id: emp_id)
+                            # ts = TimeSheet.where(employee_datum_id: emp_id).last
+                            begin
+                              rp1 = Report.find_by(emp_id: emp.employee_id,report_date: ts.date,source: 'HR Sheet')
+                              if rp1.present?
+                                rp = rp1
+                              end
+                            end
                             rp.emp_id = emp.employee_id
                             rp.time_in_office = ts.productive_hours rescue []
                             rp.source = 'HR Sheet'

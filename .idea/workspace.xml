@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="00b620da-0143-4e53-9d4d-4a218f5c1324" name="Default Changelist" comment="" />
+    <list default="true" id="00b620da-0143-4e53-9d4d-4a218f5c1324" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.rakeTasks" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.rakeTasks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/intagleo_sheet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/intagleo_sheet.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tasks/import_timesheet.rake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tasks/import_timesheet.rake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Hr Sheets/Timesheet - 201901 - IS082 - Muhammad Khabab.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Hr Sheets/Timesheet - 201901 - IS238 - Shehryar Kabir.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Hr Sheets/Timesheet - 201901 - IS277 - Amaid Niazi.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Hr Sheets/Timesheet - 201901 - IS288 - Muhammad Usman.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Hr Sheets/Timesheet - 201901 - IS301 - Umer Sani.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Hr Sheets/Timesheet - 201901 - IS302 - Muhammad Imran.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Hr Sheets/Timesheet - 201901 - IS303 - Abdul Rehman.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Hr Sheets/Timesheet - 201901 - IS304 - Hamza Majid.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Hr Sheets/Timesheet - 201901 - IS320 - Muhammad Ahmad.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Hr Sheets/Timesheet – 201901 – IS188 - Waqar Ali.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01112019-032828.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01112019-035730.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01112019-040442.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01112019-041418.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01142019-030612.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01142019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01152019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01162019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01172019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01182019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01212019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01222019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01232019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01242019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01252019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01282019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01292019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01302019.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Network Sheets/Logindetails01312019.csv" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
     <ignored path="$PROJECT_DIR$/public/system/" />
@@ -73,64 +108,103 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-700394455">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.2" value="2" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.36" value="1" />
+          <entry key="project.open.time.57" value="1" />
+          <entry key="project.opened" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="Gemfile" value="1" />
+          <entry key="js" value="1" />
+          <entry key="rake" value="3" />
+          <entry key="rb" value="14" />
+          <entry key="scss" value="1" />
+          <entry key="yml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JavaScript" value="1" />
+          <entry key="Ruby" value="18" />
+          <entry key="SCSS" value="1" />
+          <entry key="YAML" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="Gemfile" value="2" />
+          <entry key="erb" value="1126" />
+          <entry key="js" value="17" />
+          <entry key="rake" value="1686" />
+          <entry key="rb" value="999" />
+          <entry key="scss" value="17" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JavaScript" value="17" />
+          <entry key="RHTML" value="1126" />
+          <entry key="Ruby" value="2687" />
+          <entry key="SCSS" value="17" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/tasks/import_timesheet.rake">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="26" column="21" lean-forward="true" selection-end-line="113" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/tasks/import_loginDetails.rake">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="76" column="17" lean-forward="true" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/tasks/import_hrm_sheet.rake">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="437">
+              <caret line="41" column="42" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/event.rb">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/lib/tasks/import_hrm_sheet.rake">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="3" column="19" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="19" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/reports_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="101" selection-start-line="14" selection-start-column="101" selection-end-line="14" selection-end-column="101" />
+            <state relative-caret-position="1634">
+              <caret line="86" column="11" selection-start-line="86" selection-start-column="11" selection-end-line="86" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/config/schedule.rb">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/reports/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1197">
-              <caret line="63" column="63" selection-start-line="63" selection-start-column="63" selection-end-line="63" selection-end-column="63" />
+            <state relative-caret-position="919">
+              <caret line="132" column="21" selection-start-line="115" selection-start-column="18" selection-end-line="132" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/tasks/import_timesheet.rake">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-399">
+              <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -138,8 +212,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Gemfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+            <state relative-caret-position="133">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -150,8 +224,17 @@
     <findStrings>
       <find>event_type</find>
       <find>productiveHours</find>
+      <find>date</find>
+      <find>month</find>
+      <find>create!</find>
+      <find>Negative value means</find>
       <find>byebug</find>
+      <find>timeSheetDate</find>
+      <find>datepicker</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -162,16 +245,18 @@
         <option value="$PROJECT_DIR$/app/controllers/report_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/reports/index.html.haml" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/custom-style.css" />
-        <option value="$PROJECT_DIR$/lib/tasks/import_timesheet.rake" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
+        <option value="$PROJECT_DIR$/db/migrate/20190211133857_create_login_files.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20190212115924_change_punch_in_utc_time.rb" />
+        <option value="$PROJECT_DIR$/lib/tasks/import_hrm_sheet.rake" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.scss" />
-        <option value="$PROJECT_DIR$/app/controllers/reports_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/reports/index.html.erb" />
         <option value="$PROJECT_DIR$/lib/tasks/import_loginDetails.rake" />
-        <option value="$PROJECT_DIR$/lib/tasks/import_hrm_sheet.rake" />
+        <option value="$PROJECT_DIR$/app/controllers/reports_controller.rb" />
+        <option value="$PROJECT_DIR$/lib/tasks/import_timesheet.rake" />
       </list>
     </option>
   </component>
@@ -193,6 +278,7 @@
     </navigator>
     <panes>
       <pane id="RailsProjectView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -253,6 +339,11 @@
             <path>
               <item name="intagleo_sheet" type="b2602c69:ProjectViewProjectNode" />
               <item name="intagleo_sheet" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="intagleo_sheet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="intagleo_sheet" type="462c0819:PsiDirectoryNode" />
               <item name="db" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -293,7 +384,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -437,17 +527,22 @@
       <workItem from="1549016162961" duration="29286000" />
       <workItem from="1549260637887" duration="5408000" />
       <workItem from="1549455260954" duration="892000" />
+      <workItem from="1549890773871" duration="54055000" />
+      <workItem from="1550125726017" duration="14674000" />
+      <workItem from="1550212127045" duration="13154000" />
+      <workItem from="1550469802631" duration="653000" />
+      <workItem from="1551779831501" duration="6326000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68186000" />
+    <option name="totallyTimeSpent" value="157048000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18186843" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19292426" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -459,7 +554,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.09613375" />
@@ -494,13 +589,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/employee_datum.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/custom-style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -516,76 +604,117 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/report.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/event.rb">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/reports_controller.rb">
+    <entry file="file://$PROJECT_DIR$/config/database.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="101" selection-start-line="14" selection-start-column="101" selection-end-line="14" selection-end-column="101" />
+        <state relative-caret-position="323">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20190211133857_create_login_files.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20190212115924_change_punch_in_utc_time.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="56" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20190207120501_create_hrm_employee_data.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="36" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/employee_datum.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/reports/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1197">
-          <caret line="63" column="63" selection-start-line="63" selection-start-column="63" selection-end-line="63" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tasks/import_timesheet.rake">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="26" column="21" lean-forward="true" selection-end-line="113" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tasks/import_loginDetails.rake">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="76" column="17" lean-forward="true" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
+        <state relative-caret-position="133">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/tasks/import_hrm_sheet.rake">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="57">
+          <caret line="3" column="19" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="40" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/schedule.rb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tasks/import_loginDetails.rake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="41" column="42" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/reports_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1634">
+          <caret line="86" column="11" selection-start-line="86" selection-start-column="11" selection-end-line="86" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/reports/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="919">
+          <caret line="132" column="21" selection-start-line="115" selection-start-column="18" selection-end-line="132" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/report.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tasks/import_timesheet.rake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-399">
+          <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
         </state>
       </provider>
     </entry>
