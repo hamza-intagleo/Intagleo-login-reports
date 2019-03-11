@@ -7,6 +7,7 @@ ENV['RAILS_ENV'] = "development"
 
 # Example:
 #
+set :output, "log/cron.log"
 # set :output, "/path/to/my/cron_log.log"
 #
 # every 2.hours do

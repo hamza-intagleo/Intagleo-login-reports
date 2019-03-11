@@ -64,8 +64,7 @@ namespace :import_time_sheet do
                           if ed.present?
                             emp_id = ed.id
                           else
-                            emp.employee_id = ""
-                            emp.save
+                            # emp.save
                             emp_id = emp.id
                           end
                           unless emp_id.present?

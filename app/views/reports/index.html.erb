@@ -43,19 +43,24 @@
     <!-- Example row of columns -->
     <form accept-charset="UTF-8" action=<%= reports_path %> method="get" autocomplete="off">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-4">
           <div class="form-group">
             <input type="text" class="form-control datepicker " name="start_date" id="start_date" placeholder="Start date" value = "<%= params[:start_date].present? ? params[:start_date] : '' %>">
           </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
           <div class="form-group">
 
             <input type="text" class="form-control datepicker" name="end_date" id="end_date" placeholder="End date", value= "<%= params[:end_date].present? ? params[:end_date] : '' %>">
           </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-3">
+          <div class="form-group">
+            <input type="text" class="form-control" id="search_name" placeholder="Search by name" name="search_name" value = "<%= params[:search_name].present? ? params[:search_name] : '' %>">
+          </div>
+        </div>
+        <div class="col-md-1">
           <div class="form-group">
             <button type="submit" class="btn btn-primary" id="search_button">Submit</button>
           </div>
@@ -70,21 +75,22 @@
           <span style="color: #666666">2- Too high value in HR sheet means resource did not follow standard pattern of HR time sheet.</span><br>
           <span style="color: #666666">3- We have handled night shift resources in our algorithm.</span><br>
           <span style="color: #666666">4- Not all resources are covered because javed is still working on network logs of all employees.</span><br>
-          <span style="color: #666666">5- No data will be shown if network time is unavailable for a day.</span>
+          
         </div>
       </div>
 
       <hr>
 
-      <div class="row mt-4 mb-2">
-        <div class="col-md-3">
-          <div class="form-group">
-            <input type="text" class="form-control" id="search_name" placeholder="Search by name" name="search_name" value = "<%= params[:search_name].present? ? params[:search_name] : '' %>">
-          </div>
-        </div>
+      <div class="row mt-4 mb-4">
+        
 
-        <div class="col-md-9">
-          <div style="float: right"><%= link_to "Generate Report", generate_sheet_reports_path ,:class => "btn btn-primary btn-sm" , :id => "generate_report" %></div>
+        <div class="col-md-12">
+          <div style="float: right"><%= link_to "Generate Report", generate_sheet_reports_path ,:class => "btn btn-primary btn-sm" ,  :id => "generate_report", :onclick => 'return openPopup(this);' %></div>
+         <!--  <%= form_tag({:controller => 'reports', :action => 'generate_sheet'},:id => 'filter_form', :remote => true) do %>
+              
+            <%= submit_tag 'save', :name => 'commit'%><%end%> -->
+
+          <!-- <button id="generate_report_btn"> G R </button> -->
         </div> 
       </div>
     </form>
@@ -168,7 +174,7 @@
 </main>
 
 <footer class="container">
-  <p>&copy; Company 2019</p>
+  <p>&copy; <a href="https://www.intagleo.com/" target="_blank">Intagleo.com</a> 2019</p>
 </footer>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -176,8 +182,32 @@
 
         $('.datepicker').datepicker();
     });
-    $( "#generate_report" ).click(function() {
-        alert("Your downloading will begin shortly");
+    // $( "#generate_report_btn" ).click(function() {
+    //     $.ajax({
+    //      url: "/reports/generate_sheet",
+    //      type: "GET",
+    //      success: function(data) {
+          
+    //       alert(data.filename);
+    //       // $.ajax({url: "/reports/download_sheet", type: "GET"});
+            
+            
+    //        }
+    //      });
+    //     // $('#page-loader').show();
+    // });
+    function openPopup(link)
+      {
+          // link.hide();
+          
+      
+          var myWindow = window.open(link.href,'');
+
+          // return false;
+      }
+    $( "#generate_report" ).click(function(e) {
+      e.preventDefault();
+        // alert("Your downloading will begin shortly");
         // $('#page-loader').show();
     });
     $( "#search_button" ).click(function() {

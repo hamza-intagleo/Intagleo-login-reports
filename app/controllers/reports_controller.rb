@@ -18,8 +18,8 @@ class ReportsController < ApplicationController
       @end_date = (day2 +"-" + month2 +"-" + year2).to_date
       # @reports = Report.where(report_date: year+"-"+month+"-"+day...year2+"-"+month2+"-"+((day2.to_i) +1).to_s,source: "Network Sheet")
     else
-      @start_Date = ('2019-02-25').to_date
-      @end_date = ('2019-02-28').to_date
+      @start_Date = ('2019-02-26').to_date
+      @end_date = ('2019-03-06').to_date
     end
     if params[:search_name].present?
       @employees = EmployeeDatum.where("name LIKE ?", "%#{params[:search_name]}%")
@@ -49,8 +49,13 @@ class ReportsController < ApplicationController
     render 'index'
   end
 
+  def download_sheet(zip_data,filename)
+    send_data(zip_data, :type => 'application/zip', :filename => filename)
+    puts "--------------------"
+    puts "--------------------"
+  end
   def generate_sheet
-
+    # byebug
     @start_Date = ('2019-01-07').to_date
     @end_Date = ('2019-02-28').to_date
     @employees = EmployeeDatum.all.order("employee_id")
@@ -146,9 +151,10 @@ class ReportsController < ApplicationController
       end
     end
     zip_data = File.read(temp_file.path)
+    # redirect_to download_sheet_reports_path(zip_data,filename)
     send_data(zip_data, :type => 'application/zip', :filename => filename)
-
-
+    # render :json=>{"status"=>"success"}
+   
     # ============old code=============
     # workbook = WriteXLSX.new('intagleo report.xlsx')
     # worksheet = workbook.add_worksheet

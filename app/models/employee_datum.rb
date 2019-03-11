@@ -14,4 +14,6 @@
 
 class EmployeeDatum < ApplicationRecord
   validates_uniqueness_of :employee_id
+  has_many :time_sheets , dependent: :destroy
+  has_many :events , dependent: :destroy
 end

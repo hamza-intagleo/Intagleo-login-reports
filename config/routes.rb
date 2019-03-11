@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     collection do
       get :search_by_dates
       get :generate_sheet
+      get :download_sheet
     end
   end
 end
