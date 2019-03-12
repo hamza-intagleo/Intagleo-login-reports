@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     collection do
       get :search_by_dates
       get :generate_sheet
+      get :employees_list
+      get :change_employee_position
       get :download_sheet
     end
   end

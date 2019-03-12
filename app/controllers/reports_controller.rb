@@ -48,7 +48,21 @@ class ReportsController < ApplicationController
     end
     render 'index'
   end
+  def change_employee_position
+    if params[:left] == "true"
+      emp = EmployeeDatum.find params[:empid]
+      emp.has_left = false
+      emp.save
+    else
+      emp = EmployeeDatum.find params[:empid]
+      emp.has_left = true
+      emp.save
+    end
 
+  end
+  def employees_list
+    @list = EmployeeDatum.all
+  end
   def download_sheet(zip_data,filename)
     send_data(zip_data, :type => 'application/zip', :filename => filename)
     puts "--------------------"

@@ -5,9 +5,9 @@
 #  id                :integer          not null, primary key
 #  date              :date
 #  employee_datum_id :integer
-#  productive_hours  :float
-#  task_description  :string
-#  break_hours       :float
+#  productive_hours  :float(24)
+#  task_description  :string(255)
+#  break_hours       :float(24)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
