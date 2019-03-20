@@ -74,10 +74,11 @@ class ReportsController < ApplicationController
     @end_Date = ('2019-02-28').to_date
     @employees = EmployeeDatum.all.order("employee_id")
 
+    workbook = WriteXLSX.new("public/Reports/Intagleo Report.xlsx")
     (@start_Date..@end_Date).each do |date_report|
       filenam = date_report.to_s
-      workbook = WriteXLSX.new("public/Reports/intagleo report "+ filenam +".xlsx")
-      worksheet = workbook.add_worksheet
+      # workbook = WriteXLSX.new("public/Reports/intagleo report "+ filenam +".xlsx")
+      worksheet = workbook.add_worksheet(filenam)
       format = workbook.add_format
       format2 = workbook.add_format
       row = 2
@@ -147,11 +148,12 @@ class ReportsController < ApplicationController
         end
         row = row + 1
       end
-      workbook.close
+
     end
+    workbook.close
 
-
-
+    # reportFile = File.open('public/Reports/Intagleo Report.xlsx')
+    # send_data(reportFile, :filename => "Intagleo Report.xlsx")
     folder = "public"
     filename = 'Intagleo_Reports.zip'
     temp_file = Tempfile.new(filename)
@@ -165,8 +167,14 @@ class ReportsController < ApplicationController
       end
     end
     zip_data = File.read(temp_file.path)
-    # redirect_to download_sheet_reports_path(zip_data,filename)
+    ###### redirect_to download_sheet_reports_path(zip_data,filename)
     send_data(zip_data, :type => 'application/zip', :filename => filename)
+
+    #
+    #
+    #
+    #
+    #
     # render :json=>{"status"=>"success"}
    
     # ============old code=============
