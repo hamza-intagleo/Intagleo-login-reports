@@ -10,6 +10,7 @@
 #  remember_created_at    :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  role                   :string(255)
 #
 
 class User < ApplicationRecord

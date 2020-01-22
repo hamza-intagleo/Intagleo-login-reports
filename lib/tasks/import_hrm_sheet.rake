@@ -2,10 +2,10 @@ namespace :import_hrm_sheet do
 
   desc 'Import HRM sheet data'
   task :import_file => :environment do
-    connection = ActiveRecord::Base.establish_connection(:adapter  => "mysql2", :host     => "192.168.101.197", :username => "root", :password => "root", :database => "int_hr_mysql")
+    connection = ActiveRecord::Base.establish_connection(:adapter  => "mysql2", :host     => "192.168.101.197", :username => "root", :password => "123456", :database => "int_hr_mysql")
     @connection = ActiveRecord::Base.connection
-    results = @connection.exec_query("SELECT hs_hr_employee.emp_firstname,hs_hr_employee.emp_lastname,hs_hr_employee.employee_id,ohrm_attendance_record.punch_in_user_time,ohrm_attendance_record.punch_out_user_time, DATE(ohrm_attendance_record.punch_in_user_time) as date FROM ohrm_attendance_record INNER JOIN hs_hr_employee on ohrm_attendance_record.employee_id = hs_hr_employee.emp_number WHERE hs_hr_employee.termination_id IS NULL AND ohrm_attendance_record.punch_in_user_time >= '2019-01-01' AND ohrm_attendance_record.punch_out_user_time <= '2019-03-07' ORDER BY date ASC")
-    old_connection = ActiveRecord::Base.establish_connection(:adapter  => "mysql2", :host     => "localhost", :username => "root", :password => "root", :database => "emloyee_reports_hrm")
+    results = @connection.exec_query("SELECT hs_hr_employee.emp_firstname,hs_hr_employee.emp_lastname,hs_hr_employee.employee_id,ohrm_attendance_record.punch_in_user_time,ohrm_attendance_record.punch_out_user_time, DATE(ohrm_attendance_record.punch_in_user_time) as date FROM ohrm_attendance_record INNER JOIN hs_hr_employee on ohrm_attendance_record.employee_id = hs_hr_employee.emp_number WHERE hs_hr_employee.termination_id IS NULL AND ohrm_attendance_record.punch_in_user_time >= '2019-11-01' AND ohrm_attendance_record.punch_out_user_time <= '2019-12-09' ORDER BY date ASC")
+    old_connection = ActiveRecord::Base.establish_connection(:adapter  => "mysql2", :host     => "localhost", :username => "root", :password => "123456", :database => "emloyee_reports_hrm")
 
     results.each do |data_row|
       hrmEmpObj = HrmEmployeeDatum.find_by(employee_id: data_row['employee_id'].upcase,punch_in_user_time: data_row['punch_in_user_time'])

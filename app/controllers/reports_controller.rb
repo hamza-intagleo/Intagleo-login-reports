@@ -5,26 +5,30 @@ class ReportsController < ApplicationController
   require 'rubygems'
   require 'zip'
   def index
-    if params[:start_date].present? && params[:end_date].present?
-      startDate = params[:start_date].split('/')
-      month = startDate[0] rescue ""
-      day = startDate[1] rescue ""
-      year = startDate[2] rescue ""
-      startDate = params[:end_date].split('/')
-      month2 = startDate[0] rescue ""
-      day2 = startDate[1] rescue ""
-      year2 = startDate[2] rescue ""
-      @start_Date = (day +"-" + month +"-" + year).to_date
-      @end_date = (day2 +"-" + month2 +"-" + year2).to_date
-      # @reports = Report.where(report_date: year+"-"+month+"-"+day...year2+"-"+month2+"-"+((day2.to_i) +1).to_s,source: "Network Sheet")
+    if current_user.role == "employee"
+      redirect_to suggestion_index_path
     else
-      @start_Date = ('2019-02-26').to_date
-      @end_date = ('2019-03-06').to_date
-    end
-    if params[:search_name].present?
-      @employees = EmployeeDatum.where("name LIKE ?", "%#{params[:search_name]}%")
-    else
-      @employees = EmployeeDatum.all.order("employee_id")
+      if params[:start_date].present? && params[:end_date].present?
+        startDate = params[:start_date].split('/')
+        month = startDate[0] rescue ""
+        day = startDate[1] rescue ""
+        year = startDate[2] rescue ""
+        startDate = params[:end_date].split('/')
+        month2 = startDate[0] rescue ""
+        day2 = startDate[1] rescue ""
+        year2 = startDate[2] rescue ""
+        @start_Date = (day +"-" + month +"-" + year).to_date
+        @end_date = (day2 +"-" + month2 +"-" + year2).to_date
+        # @reports = Report.where(report_date: year+"-"+month+"-"+day...year2+"-"+month2+"-"+((day2.to_i) +1).to_s,source: "Network Sheet")
+      else
+        @start_Date = ('2019-12-02').to_date
+        @end_date = ('2019-12-06').to_date
+      end
+      if params[:search_name].present?
+        @employees = EmployeeDatum.where("name LIKE ?", "%#{params[:search_name]}%")
+      else
+        @employees = EmployeeDatum.all.order("employee_id")
+      end
     end
     # @reports = Report.group(report_date,emp_id).order('report_date asc')
     # @reports = Report.order('report_date asc').group_by{|rep| [rep.report_date, rep.emp_id,rep.source]}
@@ -71,7 +75,7 @@ class ReportsController < ApplicationController
   def generate_sheet
     # byebug
     @start_Date = ('2019-01-07').to_date
-    @end_Date = ('2019-02-28').to_date
+    @end_Date = ('2019-05-14').to_date
     @employees = EmployeeDatum.all.order("employee_id")
 
     workbook = WriteXLSX.new("public/Reports/Intagleo Report.xlsx")

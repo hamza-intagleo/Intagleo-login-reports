@@ -54,6 +54,8 @@ namespace :import_loginDetail do
                       if e.event_type == nil || e.event_type == ''
                         e.event_type = "Logoff"
                       end
+                      if e.event_type == nil || e.event_type == ''
+                      end
 
                       if e.save
                         unless employeeIdArray.include? employee_id
@@ -66,7 +68,6 @@ namespace :import_loginDetail do
                   end
                 end
                 employeeIdArray.each do |empId|
-
                   events = Event.where("emp_id = ? AND login_date = ? AND time(login_time) >= ?", empId, timeSheetDate, "07:00")
                   events2 = Event.where("emp_id = ? AND login_date = ? AND time(login_time) <= ?", empId, timeSheetDate+1, "07:00")
                   # events = Event.where(emp_id: empId,login_date: timeSheetDate)
@@ -80,7 +81,7 @@ namespace :import_loginDetail do
                     event.each_with_index do |cal,index|
                       if loopStarter
                         unless event[index] == nil
-                          if event[index].event_type == "System was Locked" || event[index].event_type == "System Shutdown" || event[index].event_type == "User initiated logoff" || event[index].event_type == "Logoff" || event[index+1].event_type == "Windows is shutting down"
+                          if event[index].event_type == "System was Locked" || event[index].event_type == "System Shutdown" || event[index].event_type == "User initiated logoff" || event[index].event_type == "Logoff" || event[index].event_type == "Windows is shutting down"
                             if event[index].login_time < previous_Time
                               productiveHours = productiveHours + ((((event[index].login_time) - previous_Time)/3600)+24)
                             else

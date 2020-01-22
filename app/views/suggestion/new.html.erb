@@ -1,0 +1,20 @@
+<%= stylesheet_link_tag    'suggestion', media: 'all'%>
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, class: "alert alert-info" %>
+<% end %>
+<div class="container">
+  <%= form_for @suggestion, url: {action: "create"},id: "contact", html: {class: "form-inline"} do |f| %>
+    <h3>Suggestion Form</h3>
+    <h4>Suggest us with your knowledge</h4>
+    <fieldset>
+    <%= f.select :suggestion_type,["General","Question","Query"], placeholder: "Type",  html: {class: "form-control"}%>
+    </fieldset>
+    <fieldset>
+    <%= f.text_area :description, placeholder: "Suggest...", required: true %>
+    </fieldset>
+    <%= f.submit "Create" , class: "btn btn-success" %>
+  <% end %>
+</div>
+<script>
+    $(".alert" ).fadeOut(3000);
+</script>

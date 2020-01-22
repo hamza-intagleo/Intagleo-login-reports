@@ -1,0 +1,25 @@
+<div>
+  <h2 style="text-align: center;">Feedback Page</h2>
+  <br>
+
+  <%#= form_for :feedback_question, url: feedback_question_index_path do |f| %>
+    <% @feedback_questions.each_with_index do |f,index| %>
+    <%= form_for f, url: edit_feedback_question_path(f),method: "GET", class: "feed_back_form" do |d| %>
+    <div class="col-lg-10" style="margin-left: 200px; margin-top: 50px; border: solid 1px">
+      <%= f.description %>
+      <br>
+      <%# f.fields_for :question_options  do |option| %>
+      <% f.question_options.each_with_index do |option| %>
+        <div><input type="radio" name="optin" > <%= option.option  %></div>
+      <% end %>
+    </div>
+    <% end %>
+
+  <% end %>
+  <input type="button" value="Submit" id="send_feedback">
+</div>
+<script>
+  $('#send_feedback').click(function () {
+     $('.feed_back_form').submit();
+  });
+</script>

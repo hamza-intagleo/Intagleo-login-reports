@@ -98,6 +98,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+    mdb (0.4.1)
     method_source (0.9.2)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
@@ -222,6 +223,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   listen (~> 3.0.5)
+  mdb
   mysql2 (~> 0.3.16)
   puma (~> 3.0)
   rails (~> 5.0.7, >= 5.0.7.1)
@@ -238,4 +240,4 @@ DEPENDENCIES
   write_xlsx
 
 BUNDLED WITH
-   1.16.4
+   1.17.3
